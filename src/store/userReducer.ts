@@ -20,7 +20,6 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action: any): stateType => {
-  debugger;
   switch (action.type) {
     case SET_USER:
       return { ...state, user: action.user };

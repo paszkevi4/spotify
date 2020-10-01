@@ -20,11 +20,10 @@ export const getTokenFromURL = () => {
       let parts = i.split('=');
       el[parts[0]] = decodeURIComponent(parts[1]);
       return el;
+      return;
     }, {});
 };
 
-const loginURL = `${edpoint}?client_id=${userId}&redirect_uri=${redirectURI}&scope=${scopes.join(
+export const loginURL = `${edpoint}?client_id=${userId}&redirect_uri=${redirectURI}&scope=${scopes.join(
   '%20',
 )}&response_type=token&show_dialog=true`;
-
-export default loginURL;
