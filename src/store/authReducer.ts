@@ -1,30 +1,40 @@
-const SET_TOKEN = 'SET_TOKEN';
+import { getTokenFromURL } from '../spotify/spotify';
+
+const SET_IS_AUTH = 'SET_IS_AUTH';
 
 type stateType = {
-  token: string;
+  isAuth: boolean;
 };
 
-type setTokenACType = {
-  type: typeof SET_TOKEN;
-  token: string;
+type setIsAuthACType = {
+  type: typeof SET_IS_AUTH;
 };
 
 const initialState: stateType = {
-  token: '',
+  isAuth: !!localStorage.getItem('token'),
 };
 
-const authReducer = (state = initialState, action: setTokenACType): stateType => {
+const authReducer = (state = initialState, action: setIsAuthACType): stateType => {
   switch (action.type) {
-    case SET_TOKEN:
-      return { ...state, token: action.token };
+    case SET_IS_AUTH:
+      return { ...state, isAuth: !!localStorage.getItem('token') };
     default:
       return state;
   }
 };
 
-export const setTokenAC = (token: string): setTokenACType => ({
-  type: SET_TOKEN,
-  token,
+export const setIsAuthAC = (): setIsAuthACType => ({
+  type: SET_IS_AUTH,
 });
+
+export const authorizeThunk = () => {
+  return (dispatch: any) => {
+    //@ts-ignore
+    const _token = getTokenFromURL().access_token;
+    localStorage.setItem('token', _token ? _token : '');
+    dispatch(setIsAuthAC());
+    window.location.hash = '';
+  };
+};
 
 export default authReducer;

@@ -1,13 +1,21 @@
 import React from 'react';
-import loginURL from '../../spotify/spotify';
+import { loginURL } from '../../spotify/spotify';
 
-const Login: React.FC = () => {
+import { connect } from 'react-redux';
+
+import { authorizeThunk } from '../../store/authReducer';
+
+const Login: React.FC = (props: any) => {
+  React.useEffect(() => {
+    props.authorizeThunk();
+  }, []);
   return (
     <div>
       Spotify
+      <hr />
       <a href={loginURL}>signup</a>
     </div>
   );
 };
 
-export default Login;
+export default connect(null, { authorizeThunk })(Login);
