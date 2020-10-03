@@ -1,4 +1,5 @@
-import { getTokenFromURL } from '../spotify/spotify';
+import { Dispatch as DispatchType } from 'redux';
+import spotify, { getTokenFromURL } from '../spotify/spotify';
 
 const SET_IS_AUTH = 'SET_IS_AUTH';
 
@@ -11,13 +12,13 @@ type setIsAuthACType = {
 };
 
 const initialState: stateType = {
-  isAuth: !!localStorage.getItem('token'),
+  isAuth: !!sessionStorage.getItem('token'),
 };
 
 const authReducer = (state = initialState, action: setIsAuthACType): stateType => {
   switch (action.type) {
     case SET_IS_AUTH:
-      return { ...state, isAuth: !!localStorage.getItem('token') };
+      return { ...state, isAuth: !!sessionStorage.getItem('token') };
     default:
       return state;
   }
@@ -28,10 +29,11 @@ export const setIsAuthAC = (): setIsAuthACType => ({
 });
 
 export const authorizeThunk = () => {
-  return (dispatch: any) => {
+  return (dispatch: DispatchType) => {
     //@ts-ignore
     const _token = getTokenFromURL().access_token;
-    localStorage.setItem('token', _token ? _token : '');
+    // spotify.setAccessToken(_token);
+    sessionStorage.setItem('token', _token ? _token : '');
     dispatch(setIsAuthAC());
     window.location.hash = '';
   };

@@ -3,13 +3,16 @@ import thunk from 'redux-thunk';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
   authInfo: authReducer,
   userInfo: userReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+export type RootReducerType = ReturnType<typeof rootReducer>;
 
+let store = createStore(rootReducer, applyMiddleware(thunk));
+
+//@ts-ignore
 window.store = store;
 
 export default store;

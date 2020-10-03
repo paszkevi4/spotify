@@ -1,5 +1,30 @@
 .sidebar {
-  flex: 0.2;
+  width: 232px;
   height: 100vh;
-  background: darkblue;
+  background: #121212;
+  color: #b3b3b3;
+}
+
+.sidebar img {
+  margin: 24px;
+  margin-bottom: 18px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.navLink_active .sidebar__item {
+  color: #fff;
+  background: #282828;
+}
+
+.sidebar p {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 24px;
+}
+
+.sidebar hr {
+  margin: 24px;
+  border: none;
+  border-bottom: 0.5px solid #282828;
 }
