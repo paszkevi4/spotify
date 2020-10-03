@@ -13,7 +13,6 @@ const Sidebar: React.FC = (props: any) => {
   React.useEffect(() => {
     props.setPlaylistsThunk();
   }, []);
-  console.log(props.playlists);
   return (
     <>
       <div className="sidebar">

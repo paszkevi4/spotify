@@ -1,0 +1,18 @@
+.playlist {
+  color: #fff;
+}
+
+.playlist__header {
+  display: flex;
+  justify-content: start;
+}
+
+.playlist__cover {
+  height: 232px;
+}
+
+.albumAbout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
