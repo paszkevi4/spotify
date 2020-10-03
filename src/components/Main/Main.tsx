@@ -1,11 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './main.css';
 import Sidebar from './Sidebar/Sidebar';
 import MainBody from './MainBody/MainBody';
 import Player from './Player/Player';
+import { connect } from 'react-redux';
+import { setUserThunk } from '../../store/userReducer';
 
 const Main: React.FC = (props: any) => {
+  React.useEffect(() => {
+    props.setUserThunk();
+  }, [props]);
   return (
     <div className="main">
       <Sidebar />
@@ -15,4 +19,4 @@ const Main: React.FC = (props: any) => {
   );
 };
 
-export default connect(null, null)(Main);
+export default connect(null, { setUserThunk })(Main);

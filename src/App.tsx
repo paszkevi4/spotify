@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import spotifyWeb from 'spotify-web-api-js';
 import { connect } from 'react-redux';
 import './app.css';
 
@@ -8,15 +7,17 @@ import './app.css';
 import Login from './components/Login/Login';
 import Main from './components/Main/Main';
 
-//
-const spotify = new spotifyWeb();
-//
+import { RootReducerType } from './store/store';
 
-const App: React.FC = (props: any) => {
+interface IProps {
+  isAuth?: boolean;
+}
+
+const App: React.FC<IProps> = (props) => {
   return <div className="app">{props.isAuth ? <Main /> : <Login />}</div>;
 };
 
-let mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootReducerType) => {
   return {
     isAuth: state.authInfo.isAuth,
   };

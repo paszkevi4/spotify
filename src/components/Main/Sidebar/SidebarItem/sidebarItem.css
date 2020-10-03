@@ -1,0 +1,13 @@
+.sidebar__item {
+  color: #b3b3b3;
+  height: 40px;
+  width: 216px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  margin: 1px 8px;
+  border-radius: 4px;
+}
+
+.sidebar__item_active {
+  background: #282828;
+}

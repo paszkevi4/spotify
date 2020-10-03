@@ -1,5 +1,5 @@
 .mainBody {
-  flex: 0.8;
+  width: 100%;
   height: 100vh;
-  background: darkorange;
+  background: #181818;
 }
