@@ -6,13 +6,12 @@ import { NavLink } from 'react-router-dom';
 
 import { RootReducerType } from '../../../store/store';
 import './sidebar.css';
-import { LastPage } from '@material-ui/icons';
 import logo from './spotify_wide.png';
 
 const Sidebar: React.FC = (props: any) => {
   React.useEffect(() => {
     props.setPlaylistsThunk();
-  }, []);
+  }, [props]);
   return (
     <>
       <div className="sidebar">

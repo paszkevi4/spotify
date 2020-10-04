@@ -8,7 +8,7 @@ import { authorizeThunk } from '../../store/authReducer';
 const Login: React.FC = (props: any) => {
   React.useEffect(() => {
     props.authorizeThunk();
-  }, []);
+  }, [props]);
   return (
     <div>
       Spotify

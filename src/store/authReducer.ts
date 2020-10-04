@@ -1,5 +1,5 @@
 import { Dispatch as DispatchType } from 'redux';
-import spotify, { getTokenFromURL } from '../spotify/spotify';
+import { getTokenFromURL } from '../spotify/spotify';
 
 const SET_IS_AUTH = 'SET_IS_AUTH';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css';
-import SearchIcon from '@material-ui/icons/Search';
+//import SearchIcon from '@material-ui/icons/Search';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { connect } from 'react-redux';
 
