@@ -39,3 +39,16 @@
   padding-left: 13px;
   font-size: 12px;
 }
+
+.player__volume {
+  width: 200px;
+  padding-right: 10px;
+}
+
+.player__volume > .MuiSlider-root {
+  color: #b3b3b3;
+}
+
+.player__volume > .MuiSlider-root:hover {
+  color: #1db954;
+}
