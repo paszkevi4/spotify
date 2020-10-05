@@ -9,7 +9,7 @@ const MainBody: React.FC = (props) => {
   return (
     <div className="mainBody">
       <Header />
-      <Route path="/browse" render={() => <Browse />} />
+      <Route path="/browse/:listId?" render={() => <Browse />} />
       <Route path="/playlist/:listId" render={() => <Playlist />} />
     </div>
   );

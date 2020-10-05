@@ -7,14 +7,13 @@ import spotify from '../../../../spotify/spotify';
 import { setPlaylistAC } from '../../../../store/playerReducer';
 
 const Playlist = (props: any) => {
-  const currentPlaylist = props.playlists.find((el: any) => {
-    return el.id === props.match.params.listId;
-  });
+  const [currentPlaylist, setCurrentPlaylist] = React.useState<any>(null);
   const [songs, setSongs] = React.useState([]);
+
   React.useEffect(() => {
+    spotify.getPlaylist(props.match.params.listId).then((el: any) => setCurrentPlaylist(el));
     spotify.getPlaylistTracks(props.match.params.listId).then((el: any) => setSongs(el.items));
   }, [props.match.params.listId]);
-  //spotify.getMyCurrentPlayingTrack().then((el: any) => setTemp(el));
 
   return (
     <div className="playlist">
