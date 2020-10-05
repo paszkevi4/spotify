@@ -5,6 +5,9 @@ const edpoint = 'https://accounts.spotify.com/authorize';
 const redirectURI = 'http://localhost:3000/';
 const userId = '6b07a615b6fe4f039a264c0ca5586d24';
 const scopes = [
+  'user-top-read',
+  'user-library-read',
+  'user-follow-read',
   'user-read-currently-playing',
   'user-read-recently-played',
   'user-read-playback-state',

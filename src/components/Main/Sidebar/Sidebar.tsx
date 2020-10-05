@@ -11,7 +11,7 @@ import logo from './spotify_wide.png';
 const Sidebar: React.FC = (props: any) => {
   React.useEffect(() => {
     props.setPlaylistsThunk();
-  }, [props]);
+  }, []);
   return (
     <>
       <div className="sidebar">
@@ -19,8 +19,8 @@ const Sidebar: React.FC = (props: any) => {
         <NavLink to="/home" activeClassName="navLink_active">
           <SidebarItem title="Home" />
         </NavLink>
-        <NavLink to="/search" activeClassName="navLink_active">
-          <SidebarItem title="Search" />
+        <NavLink to="/browse" activeClassName="navLink_active">
+          <SidebarItem title="Browse" />
         </NavLink>
         <NavLink to="/library" activeClassName="navLink_active">
           <SidebarItem title="My library" />
