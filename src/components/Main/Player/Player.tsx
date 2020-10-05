@@ -7,13 +7,19 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SyncIcon from '@material-ui/icons/Sync';
 import { connect } from 'react-redux';
-import { setSongThunk, setVolumeAC } from '../../../store/currentReducer';
+import {
+  setSongThunk,
+  setVolumeAC,
+  setIsPlayingAC,
+  changeCurrentTrackThunk,
+  changeShuffleAC,
+} from '../../../store/playerReducer';
 import { RootReducerType } from '../../../store/store';
 import Slider from '@material-ui/core/Slider';
 
 const Player: React.FC = (props: any) => {
   const audioRef = React.useRef(null);
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  //const [isPlaying, setIsPlaying] = React.useState(props.isPlaying);
   const volume = React.useState(props.volume)[0];
 
   // Play/Pause controls
@@ -22,7 +28,7 @@ const Player: React.FC = (props: any) => {
   }, []);
 
   const togglePlaying = (value: boolean) => {
-    setIsPlaying(value);
+    props.setIsPlayingAC(value);
     //@ts-ignore
     value ? audioRef.current.play() : audioRef.current.pause();
   };
@@ -31,6 +37,10 @@ const Player: React.FC = (props: any) => {
   useEffect(() => {
     //@ts-ignore
     audioRef.current.volume = props.volume;
+    //@ts-ignore
+    props.isPlaying && audioRef.current.play();
+    //@ts-ignore
+    audioRef.current.loop = props.loop;
   }, [props]);
   const handleVolume = (_: any, n: any) => {
     props.setVolumeAC(n);
@@ -40,22 +50,25 @@ const Player: React.FC = (props: any) => {
   window.volume = props.volume;
   return (
     <div className="player">
-      <audio ref={audioRef} src={props.track?.preview_url}></audio>
+      <audio
+        onEnded={() => props.changeCurrentTrackThunk(props.trackNumber + 1)}
+        ref={audioRef}
+        src={props.track?.preview_url}></audio>
       <div className="player__song">
         <img src={props.track?.album?.images[2].url} alt="track cover" />
         <h4>{props.track?.name}</h4>
         <p>{props.track?.album?.artists[0].name}</p>
       </div>
       <div className="player__controls">
-        <ShuffleIcon />
-        <SkipPreviousIcon />
-        {isPlaying ? (
+        <ShuffleIcon onClick={props.changeShuffleAC} />
+        <SkipPreviousIcon onClick={() => props.changeCurrentTrackThunk(props.trackNumber - 1)} />
+        {props.isPlaying ? (
           <PauseCircleOutlineIcon onClick={() => togglePlaying(false)} />
         ) : (
           <PlayCircleOutlineIcon onClick={() => togglePlaying(true)} />
         )}
 
-        <SkipNextIcon />
+        <SkipNextIcon onClick={() => props.changeCurrentTrackThunk(props.trackNumber + 1)} />
         <SyncIcon />
       </div>
       <div className="player__volume">
@@ -73,9 +86,19 @@ const Player: React.FC = (props: any) => {
 
 const mapStateToProps = (state: RootReducerType) => {
   return {
-    track: state.current.playlist[state.current.song].track,
-    volume: state.current.volume,
+    track: state.player.playlist[state.player.track].track,
+    trackNumber: state.player.track,
+    volume: state.player.volume,
+    isPlaying: state.player.isPlaying,
+    shuffle: state.player.shuffle,
+    loop: state.player.loop,
   };
 };
 
-export default connect(mapStateToProps, { setSongThunk, setVolumeAC })(Player);
+export default connect(mapStateToProps, {
+  setSongThunk,
+  setVolumeAC,
+  setIsPlayingAC,
+  changeCurrentTrackThunk,
+  changeShuffleAC,
+})(Player);

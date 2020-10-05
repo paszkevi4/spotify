@@ -4,7 +4,7 @@ import { RootReducerType } from '../../../../store/store';
 import './playlist.css';
 import { withRouter } from 'react-router';
 import spotify from '../../../../spotify/spotify';
-import { setPlaylistAC } from '../../../../store/currentReducer';
+import { setPlaylistAC } from '../../../../store/playerReducer';
 
 const Playlist = (props: any) => {
   const currentPlaylist = props.playlists.find((el: any) => {
