@@ -5,6 +5,7 @@ import './playlist.css';
 import { withRouter } from 'react-router';
 import spotify from '../../../../spotify/spotify';
 import { setPlaylistAC } from '../../../../store/playerReducer';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const Playlist = (props: any) => {
   const [currentPlaylist, setCurrentPlaylist] = React.useState<any>(null);
@@ -17,6 +18,7 @@ const Playlist = (props: any) => {
 
   return (
     <div className="playlist">
+      <div className="playlist__gradient"></div>
       <div className="playlist__header">
         <img
           className="playlist__cover"
@@ -35,17 +37,47 @@ const Playlist = (props: any) => {
           <h5 className="albumAbout__author">{currentPlaylist?.owner.display_name}</h5>
         </div>
       </div>
-      <div className="playlist__songs">
+      <div className="play_button">
+        <PlayArrowIcon fontSize="large" />
+      </div>
+      <div className="playlist__table_head">
+        <p className="table__name">
+          <span>#</span>
+          <span>NAME</span>
+        </p>
+        <p className="table__info">
+          <span>ALBUM</span>
+          <span>DURATION</span>
+        </p>
+      </div>
+      <div className="playlist__table">
         {songs.map((el: { track: any }, i: number) => {
+          console.log(el);
+          const min = Math.floor((el.track.duration_ms / 1000 / 60) << 0);
+          let sec: string | number = Math.floor((el.track.duration_ms / 1000) % 60);
+          if (sec < 10) {
+            sec = '0' + sec;
+          }
           return (
-            <p
+            <div
+              className="playlist__track"
               key={i}
               onClick={() => {
-                //spotify.getTrack(el.track.id).then((el) => console.log(el));
                 props.setPlaylistAC(songs, i);
               }}>
-              {el.track.name}
-            </p>
+              <div>
+                <p className="playlist__number">{i + 1}</p>
+                <img src={el.track.album.images[2].url} alt={el.track.album.name} />
+                <div className="playlist__name">
+                  <p>{el.track.name}</p>
+                  <p>{el.track.artists[0].name}</p>
+                </div>
+              </div>
+              <div className="playlist__info">
+                <p>{el.track.album.name}</p>
+                <p>{min + ':' + sec}</p>
+              </div>
+            </div>
           );
         })}
       </div>

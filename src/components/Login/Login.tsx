@@ -1,5 +1,7 @@
 import React from 'react';
+import './login.css';
 import { loginURL } from '../../spotify/spotify';
+import logo from '../../images/spotify_wide.png';
 
 import { connect } from 'react-redux';
 
@@ -10,10 +12,9 @@ const Login: React.FC = (props: any) => {
     props.authorizeThunk();
   }, [props]);
   return (
-    <div>
-      Spotify
-      <hr />
-      <a href={loginURL}>signup</a>
+    <div className="login">
+      <img src={logo} alt="1" />
+      <a href={loginURL}>SIGN IN</a>
     </div>
   );
 };
