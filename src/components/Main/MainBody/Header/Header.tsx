@@ -9,8 +9,24 @@ const Header: React.FC = (props: any) => {
     sessionStorage.removeItem('token');
     window.location.reload();
   };
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  React.useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    });
+    return () => {
+      //@ts-ignore
+      window.removeEventListener('scroll');
+    };
+  }, []);
+
   return (
-    <header>
+    <header className={isVisible ? 'visible' : ''}>
       {/* <div className="header__search">
         <SearchIcon />
         <input placeholder="Search" type="text" />

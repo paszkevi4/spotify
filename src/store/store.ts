@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
 import browseReducer from './browseReducer';
+import homeReducer from './homeReducer';
 
 import playerReducer from './playerReducer';
 
@@ -11,6 +12,7 @@ let rootReducer = combineReducers({
   userInfo: userReducer,
   browse: browseReducer,
   player: playerReducer,
+  home: homeReducer,
 });
 
 export type RootReducerType = ReturnType<typeof rootReducer>;

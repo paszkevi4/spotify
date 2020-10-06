@@ -52,7 +52,6 @@ const Playlist = (props: any) => {
       </div>
       <div className="playlist__table">
         {songs.map((el: { track: any }, i: number) => {
-          console.log(el);
           const min = Math.floor((el.track.duration_ms / 1000 / 60) << 0);
           let sec: string | number = Math.floor((el.track.duration_ms / 1000) % 60);
           if (sec < 10) {

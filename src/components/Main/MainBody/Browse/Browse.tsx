@@ -8,14 +8,11 @@ import { withRouter } from 'react-router';
 import './browse.css';
 
 const Browse = (props: any) => {
-  console.log('cats in props', props);
   React.useEffect(() => {
     props.setPlaylistsThunk();
   }, []);
   React.useEffect(() => {
     props.setCurrentCategoryThunk(props.match.params.listId);
-    if (props.match.params.listId) {
-    }
   }, [props.match.params.listId]);
   return (
     <>
