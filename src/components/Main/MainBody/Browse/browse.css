@@ -4,6 +4,10 @@
   height: 16vw;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 .browse__name {
   position: absolute;
   color: #fff;

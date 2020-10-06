@@ -55,6 +55,7 @@ export const setUserThunk = () => {
   return (dispatch: DispatchType) => {
     spotify.setAccessToken(sessionStorage.getItem('token'));
     spotify.getMe().then((me) => dispatch(setUserAC(me)));
+    //spotify.get().then((categories) => console.log(categories));
   };
 };
 

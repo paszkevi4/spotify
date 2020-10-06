@@ -53,7 +53,6 @@ export const setPlaylistsThunk = () => {
     spotify
       .getCategories()
       .then((categories: any) => dispatch(setCategoriesAC(categories.categories.items)));
-    spotify.getCategories().then((categories) => console.log(categories));
   };
 };
 

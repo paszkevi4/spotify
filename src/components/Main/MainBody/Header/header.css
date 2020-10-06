@@ -3,7 +3,13 @@ header {
   justify-content: flex-end;
   height: 50px;
   width: calc(100vw - 232px);
-  position: absolute;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+}
+
+.visible {
+  background: #3f3f3f;
 }
 
 .header__name {
@@ -17,8 +23,6 @@ header {
   border-radius: 16px;
   color: #fff;
   background: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  z-index: 5;
 }
 
 .header__name img {
