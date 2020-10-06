@@ -59,7 +59,7 @@ const initialState: stateType = {
   isPlaying: false,
   volume: 0.2,
   shuffle: false,
-  loop: false,
+  loop: true,
 };
 
 type actionType =
@@ -131,14 +131,14 @@ export const changeLoopAC = (): changeLoopACType => ({
 
 export const changeCurrentTrackThunk = (track: number) => {
   return (dispatch: DispatchType, getState: any) => {
-    if (getState().current.shuffle) {
-      track = Math.ceil(Math.random() * getState().current.playlist.length) - 1;
+    if (getState().player.shuffle) {
+      track = Math.ceil(Math.random() * getState().player.playlist.length) - 1;
     }
-    if (track >= getState().current.playlist.length) {
+    if (track >= getState().player.playlist.length) {
       track = 0;
     }
     if (track < 0) {
-      track = getState().current.playlist.length - 1;
+      track = getState().player.playlist.length - 1;
     }
     dispatch(changeCurrentTrackAC(track));
   };

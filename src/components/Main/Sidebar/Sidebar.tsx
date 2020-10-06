@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { RootReducerType } from '../../../store/store';
 import './sidebar.css';
-import logo from './spotify_wide.png';
+import logo from '../../../images/spotify_wide.png';
 
 const Sidebar: React.FC = (props: any) => {
   React.useEffect(() => {

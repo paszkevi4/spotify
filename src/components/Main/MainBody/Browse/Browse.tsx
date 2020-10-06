@@ -18,24 +18,39 @@ const Browse = (props: any) => {
     }
   }, [props.match.params.listId]);
   return (
-    <div className="browse">
-      {!props.match.params.listId &&
-        props.categories.map((el: any) => {
-          return (
-            <NavLink to={`/browse/${el.id}`} key={el.id}>
-              <img src={el.icons[0].url} />
-            </NavLink>
-          );
-        })}
-      {props.match.params.listId &&
-        props.current?.map((el: any) => {
-          return (
-            <NavLink to={`/playlist/${el.id}`} key={el.id}>
-              <img src={el.images[0].url} />
-            </NavLink>
-          );
-        })}
-    </div>
+    <>
+      <div className="browse__header">
+        <p className="browse__name">
+          {props.match.params.listId
+            ? props.categories.find((el: any) => {
+                return el.id === props.match.params.listId;
+              }).name
+            : 'Browse'}
+        </p>
+        <div className="browse__gradient"></div>
+      </div>
+      <div className="browse">
+        {!props.match.params.listId &&
+          props.categories.map((el: any) => {
+            return (
+              <NavLink to={`/browse/${el.id}`} key={el.id}>
+                <div className="browse__plate">
+                  <img src={el.icons[0].url} />
+                  <span>{el.name}</span>
+                </div>
+              </NavLink>
+            );
+          })}
+        {props.match.params.listId &&
+          props.current?.map((el: any) => {
+            return (
+              <NavLink to={`/playlist/${el.id}`} key={el.id}>
+                <img src={el.images[0].url} />
+              </NavLink>
+            );
+          })}
+      </div>
+    </>
   );
 };
 
