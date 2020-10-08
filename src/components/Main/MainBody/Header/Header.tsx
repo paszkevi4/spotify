@@ -21,7 +21,7 @@ const Header: React.FC = (props: any) => {
     });
     return () => {
       //@ts-ignore
-      window.removeEventListener('scroll');
+      window.removeEventListener('scroll', () => {});
     };
   }, []);
 

@@ -52,8 +52,8 @@ const Playlist = (props: any) => {
       </div>
       <div className="playlist__table">
         {songs.map((el: { track: any }, i: number) => {
-          const min = Math.floor((el.track.duration_ms / 1000 / 60) << 0);
-          let sec: string | number = Math.floor((el.track.duration_ms / 1000) % 60);
+          const min = Math.floor((el.track?.duration_ms / 1000 / 60) << 0);
+          let sec: string | number = Math.floor((el.track?.duration_ms / 1000) % 60);
           if (sec < 10) {
             sec = '0' + sec;
           }
@@ -66,14 +66,14 @@ const Playlist = (props: any) => {
               }}>
               <div>
                 <p className="playlist__number">{i + 1}</p>
-                <img src={el.track.album.images[2].url} alt={el.track.album.name} />
+                <img src={el.track?.album.images[2].url} alt={el.track?.album.name} />
                 <div className="playlist__name">
-                  <p>{el.track.name}</p>
-                  <p>{el.track.artists[0].name}</p>
+                  <p>{el.track?.name}</p>
+                  <p>{el.track?.artists[0].name}</p>
                 </div>
               </div>
               <div className="playlist__info">
-                <p>{el.track.album.name}</p>
+                <p>{el.track?.album.name}</p>
                 <p>{min + ':' + sec}</p>
               </div>
             </div>
@@ -90,4 +90,4 @@ const mapStateToProps = (state: RootReducerType) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, { setPlaylistAC })(Playlist));
+export default withRouter(connect(null, { setPlaylistAC })(Playlist));

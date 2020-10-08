@@ -148,6 +148,9 @@ export const setSongThunk = () => {
   return (dispatch: DispatchType) => {
     spotify.setAccessToken(sessionStorage.getItem('token'));
     spotify.getTrack('0HPD5WQqrq7wPWR7P7Dw1i').then((track) => dispatch(setDefaultTrackAC(track)));
+
+    spotify.getAlbumTracks('71O60S5gIJSIAhdnrDIh3N').then((el: any) => console.log(el));
+    //spotify.getPlaylist('37i9dQZF1DWZd79rJ6a7lp').then((el: any) => console.log(el));
   };
 };
 
