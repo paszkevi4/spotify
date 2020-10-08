@@ -1,3 +1,34 @@
 .homepage {
-  color: red;
+  color: #fff;
+  margin-bottom: 90px;
+}
+
+.home__header {
+  position: relative;
+  width: 100%;
+  height: 16vw;
+}
+
+.home__name {
+  position: absolute;
+  color: #fff;
+  font-size: 70px;
+  font-weight: 700;
+  top: 8vw;
+  left: 5vw;
+  z-index: 1;
+}
+
+.home__gradient {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  height: 400px;
+  width: 100%;
+  background: linear-gradient(#3f3f3f, transparent);
+}
+
+.home {
+  position: relative;
+  z-index: 1;
 }

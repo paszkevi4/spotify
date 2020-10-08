@@ -1,0 +1,24 @@
+.row {
+  margin: 0 25px;
+}
+
+.row__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row__items {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.row__item {
+  width: calc((100vw - 407px) / 6);
+  min-height: 300px;
+  margin-right: 25px;
+}
+
+.row__item img {
+  width: calc((100vw - 407px) / 6);
+  object-fit: contain;
+}
