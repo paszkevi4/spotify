@@ -59,8 +59,12 @@ const Playlist = (props: any) => {
           }
           return (
             <div
-              className="playlist__track"
-              key={i}
+              className={
+                el.track?.id === props.currTrack
+                  ? 'playlist__track  playlist__track_playing'
+                  : 'playlist__track'
+              }
+              key={el.track?.id}
               onClick={() => {
                 props.setPlaylistAC(songs, i);
               }}>
@@ -68,7 +72,7 @@ const Playlist = (props: any) => {
                 <p className="playlist__number">{i + 1}</p>
                 <img src={el.track?.album.images[2].url} alt={el.track?.album.name} />
                 <div className="playlist__name">
-                  <p>{el.track?.name}</p>
+                  <p className="playlist__songName">{el.track?.name}</p>
                   <p>{el.track?.artists[0].name}</p>
                 </div>
               </div>
@@ -86,8 +90,11 @@ const Playlist = (props: any) => {
 
 const mapStateToProps = (state: RootReducerType) => {
   return {
-    playlists: state.userInfo.playlists,
+    //playlists: state.userInfo.playlists,
+    // playlistToSearch: state.player.playlist,
+    // trackToSearch: state.player.track,
+    currTrack: state.player.playlist[state.player.track].track?.id,
   };
 };
 
-export default withRouter(connect(null, { setPlaylistAC })(Playlist));
+export default withRouter(connect(mapStateToProps, { setPlaylistAC })(Playlist));

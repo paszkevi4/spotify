@@ -5,9 +5,10 @@
   box-sizing: border-box;
   padding: 0 16px;
   margin: 1px 8px;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
 }
 
-.sidebar__item_active {
-  background: #282828;
+.sidebar__item svg {
+  margin-right: 10px;
 }
