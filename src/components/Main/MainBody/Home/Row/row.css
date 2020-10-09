@@ -1,5 +1,6 @@
 .row {
   margin: 0 25px;
+  overflow: hidden;
 }
 
 .row__header {
@@ -9,13 +10,27 @@
 
 .row__items {
   display: flex;
-  overflow-x: scroll;
+  transition: 0.3s ease-out;
 }
 
 .row__item {
   width: calc((100vw - 407px) / 6);
   min-height: 300px;
   margin-right: 25px;
+}
+
+.row__item:hover .item__name {
+  border-bottom: 2px solid #fff;
+}
+
+.item__name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.item__description {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .row__item img {
