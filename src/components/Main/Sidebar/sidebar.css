@@ -15,6 +15,21 @@
 .navLink_active .sidebar__item {
   color: #fff;
   background: #282828;
+
+  border-radius: 4px;
+}
+
+.playlistLink_active .sidebar__item {
+  position: relative;
+}
+
+.playlistLink_active .sidebar__item:before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  height: 100%;
+  width: 2px;
+  background: #1db954;
 }
 
 .sidebar p {

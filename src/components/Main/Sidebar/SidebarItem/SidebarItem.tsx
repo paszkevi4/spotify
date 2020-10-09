@@ -2,12 +2,17 @@ import React from 'react';
 import './sidebarItem.css';
 
 interface IProps {
-  Icon?: React.FC;
+  icon?: object;
   title: string;
 }
 
-const SidebarItem: React.FC<IProps> = ({ Icon, title }) => {
-  return <div className="sidebar__item">{title}</div>;
+const SidebarItem: React.FC<IProps> = ({ icon, title }) => {
+  return (
+    <div className="sidebar__item">
+      {icon}
+      {title}
+    </div>
+  );
 };
 
 export default SidebarItem;
