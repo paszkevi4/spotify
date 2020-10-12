@@ -1,6 +1,8 @@
 .sidebar {
+  position: sticky;
+  top: 0;
   width: 232px;
-  height: 100vh;
+  height: 50vh;
   background: #121212;
   color: #b3b3b3;
 }
@@ -15,7 +17,6 @@
 .navLink_active .sidebar__item {
   color: #fff;
   background: #282828;
-
   border-radius: 4px;
 }
 

@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './app.css';
+import { RootReducerType } from './store/store';
 
+// Styles
+import './app.css';
 //
 // Components
 import Login from './components/Login/Login';
 import Main from './components/Main/Main';
 
-import { RootReducerType } from './store/store';
-
 interface IProps {
   isAuth?: boolean;
 }
 
-const App: React.FC<IProps> = (props) => {
-  return <div className="app">{props.isAuth ? <Main /> : <Login />}</div>;
+const App: React.FC<IProps> = ({ isAuth }) => {
+  return <div className="app">{isAuth ? <Main /> : <Login />}</div>;
 };
 
 const mapStateToProps = (state: RootReducerType) => {

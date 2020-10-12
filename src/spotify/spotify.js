@@ -2,8 +2,9 @@ import spotifyApi from 'spotify-web-api-js';
 const spotify = new spotifyApi();
 
 const edpoint = 'https://accounts.spotify.com/authorize';
-const redirectURI = 'http://localhost:3000/';
-const userId = '6b07a615b6fe4f039a264c0ca5586d24';
+const redirectURI = 'https://sp0tify.web.app/';
+const userId = 'e1cfbdf320f64fc4b4d54f6f744f8c3f';
+
 const scopes = [
   'user-top-read',
   'user-library-read',

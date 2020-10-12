@@ -1,12 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './player.css';
-import ShuffleIcon from '@material-ui/icons/Shuffle';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
-import SyncIcon from '@material-ui/icons/Sync';
 import { connect } from 'react-redux';
+
+// Store
 import {
   setSongThunk,
   setVolumeAC,
@@ -16,12 +11,35 @@ import {
   changeLoopAC,
 } from '../../../store/playerReducer';
 import { RootReducerType } from '../../../store/store';
+
+// Components
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import SyncIcon from '@material-ui/icons/Sync';
 import Slider from '@material-ui/core/Slider';
 
-const Player: React.FC = (props: any) => {
-  const audioRef = useRef(null);
-  //@ts-ignore
-  window.audioRef = audioRef;
+import './player.css';
+
+interface IProps {
+  track: { preview_url: string; album: any; name: string };
+  trackNumber: number;
+  volume: number;
+  isPlaying: boolean;
+  shuffle: boolean;
+  loop: boolean;
+  setSongThunk: () => void;
+  changeCurrentTrackThunk: (track: number) => void;
+  setVolumeAC: (n: number) => {};
+  setIsPlayingAC: (value: any) => {};
+  changeShuffleAC: () => {};
+  changeLoopAC: () => {};
+}
+
+const Player: React.FC<IProps> = (props) => {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const volume = useState(props.volume)[0];
   const [playback, setPlayback] = useState(0);
 
@@ -29,8 +47,7 @@ const Player: React.FC = (props: any) => {
     let interval: any;
     if (props.isPlaying) {
       interval = setInterval(() => {
-        //@ts-ignore
-        setPlayback(audioRef.current?.currentTime);
+        audioRef.current && setPlayback(audioRef.current.currentTime);
       }, 10);
     } else {
       clearInterval(interval);
@@ -47,25 +64,22 @@ const Player: React.FC = (props: any) => {
 
   const togglePlaying = (value: boolean) => {
     props.setIsPlayingAC(value);
-    //@ts-ignore
-    value ? audioRef.current.play() : audioRef.current.pause();
+    if (audioRef.current) {
+      value ? audioRef.current.play() : audioRef.current.pause();
+    }
   };
 
   // Volume controls
   useEffect(() => {
-    //@ts-ignore
-    audioRef.current.volume = props.volume;
-    //@ts-ignore
-    props.isPlaying && audioRef.current.play();
-    //@ts-ignore
-    audioRef.current.loop = props.loop;
+    if (audioRef.current) {
+      audioRef.current.volume = props.volume;
+      props.isPlaying && audioRef.current.play();
+      audioRef.current.loop = props.loop;
+    }
   }, [props]);
   const handleVolume = (_: any, n: any) => {
     props.setVolumeAC(n);
   };
-
-  //@ts-ignore
-  window.volume = props.volume;
   return (
     <div className="player">
       <audio
@@ -93,15 +107,7 @@ const Player: React.FC = (props: any) => {
           <SkipNextIcon onClick={() => props.changeCurrentTrackThunk(props.trackNumber + 1)} />
           <SyncIcon onClick={props.changeLoopAC} style={props.loop ? { color: '#1db954' } : {}} />
         </div>
-        <Slider
-          // onChangeCommitted={handleVolume}
-          min={0}
-          //@ts-ignore
-          max={audioRef.current?.duration}
-          defaultValue={0}
-          //@ts-ignore
-          value={playback}
-        />
+        <Slider min={0} max={audioRef.current?.duration} defaultValue={0} value={playback} />
       </div>
 
       <div className="player__volume">

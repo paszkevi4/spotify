@@ -1,11 +1,21 @@
 import React from 'react';
-import './homepage.css';
 import { connect } from 'react-redux';
-import { getAlbumsThunk } from '../../../../store/homeReducer';
-import { RootReducerType } from '../../../../store/store';
+
 import Row from './Row/Row';
 
-const Home = (props: any) => {
+// Store
+import { RootReducerType } from '../../../../store/store';
+import { getAlbumsThunk } from '../../../../store/homeReducer';
+
+// Styles
+import './homepage.css';
+
+interface IProps {
+  home: { featured: []; pop: []; rock: []; hiphop: []; indie: [] };
+  getAlbumsThunk: () => void;
+}
+
+const Home: React.FC<IProps> = (props) => {
   React.useEffect(() => {
     props.getAlbumsThunk();
   }, []);
@@ -16,11 +26,11 @@ const Home = (props: any) => {
         <div className="home__gradient"></div>
       </div>
       <div className="home">
-        <Row title="featured" items={props.home.featured} />
-        <Row title="pop" items={props.home.pop} />
-        <Row title="rock" items={props.home.rock} />
-        <Row title="hiphop" items={props.home.hiphop} />
-        <Row title="indie" items={props.home.indie} />
+        <Row title="Featured" items={props.home.featured} />
+        <Row title="Pop" items={props.home.pop} />
+        <Row title="Rock" items={props.home.rock} />
+        <Row title="Hip-hop" items={props.home.hiphop} />
+        <Row title="Indie" items={props.home.indie} />
       </div>
     </div>
   );

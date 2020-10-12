@@ -1,16 +1,21 @@
 import React from 'react';
-import './login.css';
-import { loginURL } from '../../spotify/spotify';
-import logo from '../../images/spotify_wide.png';
-
 import { connect } from 'react-redux';
 
+import { loginURL } from '../../spotify/spotify';
 import { authorizeThunk } from '../../store/authReducer';
 
-const Login: React.FC = (props: any) => {
+// Styles
+import './login.css';
+import logo from '../../images/spotify_wide.png';
+
+interface IProps {
+  authorizeThunk: () => void;
+}
+
+const Login: React.FC<IProps> = ({ authorizeThunk }) => {
   React.useEffect(() => {
-    props.authorizeThunk();
-  }, [props]);
+    authorizeThunk();
+  }, [authorizeThunk]);
   return (
     <div className="login">
       <img src={logo} alt="1" />

@@ -1,34 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
+// Store
 import { RootReducerType } from '../../../../store/store';
 import { setPlaylistsThunk, setCurrentCategoryThunk } from '../../../../store/browseReducer';
-import { NavLink } from 'react-router-dom';
 
-import { withRouter } from 'react-router';
+// Styles
 import './browse.css';
 
-const Browse = (props: any) => {
+interface IProps {
+  match: { params: { listId: string } };
+  categories: Array<any>;
+  current?: Array<any>;
+  setPlaylistsThunk: () => void;
+  setCurrentCategoryThunk: (id: string) => void;
+}
+
+const Browse: React.FC<IProps> = ({
+  match,
+  categories,
+  current,
+  setPlaylistsThunk,
+  setCurrentCategoryThunk,
+}) => {
   React.useEffect(() => {
-    props.setPlaylistsThunk();
+    setPlaylistsThunk();
   }, []);
   React.useEffect(() => {
-    props.setCurrentCategoryThunk(props.match.params.listId);
-  }, [props.match.params.listId]);
+    setCurrentCategoryThunk(match.params.listId);
+  }, [match.params.listId]);
   return (
     <>
       <div className="browse__header">
         <p className="browse__name">
-          {props.match.params.listId
-            ? props.categories.find((el: any) => {
-                return el.id === props.match.params.listId;
+          {match.params.listId
+            ? categories.find((el: any) => {
+                return el.id === match.params.listId;
               }).name
             : 'Browse'}
         </p>
         <div className="browse__gradient"></div>
       </div>
       <div className="browse">
-        {!props.match.params.listId &&
-          props.categories.map((el: any) => {
+        {!match.params.listId &&
+          categories.map((el: any) => {
             return (
               <NavLink to={`/browse/${el.id}`} key={el.id}>
                 <div className="browse__plate">
@@ -38,8 +55,8 @@ const Browse = (props: any) => {
               </NavLink>
             );
           })}
-        {props.match.params.listId &&
-          props.current?.map((el: any) => {
+        {match.params.listId &&
+          current?.map((el: any) => {
             return (
               <NavLink to={`/playlist/${el.id}`} key={el.id}>
                 <img src={el.images[0].url} />
