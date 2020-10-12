@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import './row.css';
 import { NavLink } from 'react-router-dom';
 
+// Components
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+import './row.css';
+
 const Row = (props: any) => {
-  console.log(props);
   const [offset, setOffset] = useState(0);
   const offsets = [
     '0',
@@ -28,18 +32,14 @@ const Row = (props: any) => {
       <div className="row__header">
         <p>{props.title || 'Title'}</p>
         <div>
-          <button
+          <ChevronLeftIcon
             onClick={() => {
               changeOffset(offset - 1);
-            }}>
-            left
-          </button>
-          <button
+            }}></ChevronLeftIcon>
+          <ChevronRightIcon
             onClick={() => {
               changeOffset(offset + 1);
-            }}>
-            right
-          </button>
+            }}></ChevronRightIcon>
         </div>
       </div>
       <div className="row__items" style={{ transform: `translateX(${offsets[offset]})` }}>
@@ -51,7 +51,7 @@ const Row = (props: any) => {
                 <div>
                   <img key={i} src={el.images[0].url} alt={el.name} />
                   <span className="item__name">{el.name}</span>
-                  <div className="item__description">{el.description}</div>
+                  <p className="item__description">{el.description}</p>
                 </div>
               </NavLink>
             </div>

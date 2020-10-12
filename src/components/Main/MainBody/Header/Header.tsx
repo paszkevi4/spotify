@@ -1,10 +1,19 @@
-import React from 'react';
-import './header.css';
-//import SearchIcon from '@material-ui/icons/Search';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { RootReducerType } from '../../../../store/store';
 
-const Header: React.FC = (props: any) => {
+// Styles
+import './header.css';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+interface IProps {
+  avatar: string;
+  userName: string;
+}
+
+const Header: React.FC<IProps> = ({ avatar, userName }) => {
+  const [showLogout, setShowLogout] = useState(false);
+
   const logOut = () => {
     sessionStorage.removeItem('token');
     window.location.reload();
@@ -20,27 +29,28 @@ const Header: React.FC = (props: any) => {
       }
     });
     return () => {
-      //@ts-ignore
       window.removeEventListener('scroll', () => {});
     };
   }, []);
 
   return (
     <header className={isVisible ? 'visible' : ''}>
-      {/* <div className="header__search">
-        <SearchIcon />
-        <input placeholder="Search" type="text" />
-      </div> */}
-      <div className="header__name" onClick={logOut}>
-        <img src={props.avatar} alt="your avatar" />
-        <h4>{props.userName}</h4>
+      <div className="header__name" onClick={() => setShowLogout(!showLogout)}>
+        <img src={avatar} alt="your avatar" />
+        <h4>{userName}</h4>
         <ArrowDropDownIcon />
+        <ul className="name__menu" style={{ visibility: showLogout ? 'visible' : 'hidden' }}>
+          <li>Account</li>
+          <li>Upgrade Your Account</li>
+          <li>Settings</li>
+          <li onClick={logOut}>Log Out</li>
+        </ul>
       </div>
     </header>
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootReducerType) => ({
   avatar: state.userInfo.user?.images[0].url,
   userName: state.userInfo.user?.display_name,
 });

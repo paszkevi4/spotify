@@ -22,6 +22,8 @@ header {
   justify-content: space-between;
   border-radius: 16px;
   color: #fff;
+  cursor: pointer;
+  position: relative;
   background: rgba(0, 0, 0, 0.3);
 }
 
@@ -32,15 +34,23 @@ header {
   border-radius: 50%;
 }
 
-/* .header__search {
-  display: flex;
-  align-items: center;
-  background: #fff;
-} 
+.name__menu {
+  background: #282828;
+  border: 1px solid black;
+  border-radius: 3px;
+  width: 170%;
+  margin-left: 5%;
+  min-height: 30px;
+  position: absolute;
+  bottom: -150px;
+  right: 0;
+  list-style: none;
+  text-align: left;
+  padding: 5px 0;
+  box-shadow: -3px 3px 15px 2px rgb(0, 0, 0);
+}
 
-.header__search input {
-  border: none;
-  outline: none;
-  width: 100%;
-  height: 100%;
-} */
+.name__menu li {
+  padding: 5px 0;
+  padding-left: 40px;
+}

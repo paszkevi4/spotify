@@ -1,13 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { RootReducerType } from '../../../../store/store';
-import './playlist.css';
 import { withRouter } from 'react-router';
-import spotify from '../../../../spotify/spotify';
-import { setPlaylistAC } from '../../../../store/playerReducer';
+
+// Components
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
-const Playlist = (props: any) => {
+// Store
+import spotify from '../../../../spotify/spotify';
+import { RootReducerType } from '../../../../store/store';
+import { setPlaylistAC } from '../../../../store/playerReducer';
+
+import './playlist.css';
+
+interface IProps {
+  match: { params: { listId: string } };
+  currTrack: string;
+  setPlaylistAC: (songs: any, i: number) => void;
+}
+
+const Playlist: React.FC<IProps> = (props) => {
   const [currentPlaylist, setCurrentPlaylist] = React.useState<any>(null);
   const [songs, setSongs] = React.useState([]);
 
@@ -90,9 +101,6 @@ const Playlist = (props: any) => {
 
 const mapStateToProps = (state: RootReducerType) => {
   return {
-    //playlists: state.userInfo.playlists,
-    // playlistToSearch: state.player.playlist,
-    // trackToSearch: state.player.track,
     currTrack: state.player.playlist[state.player.track].track?.id,
   };
 };
